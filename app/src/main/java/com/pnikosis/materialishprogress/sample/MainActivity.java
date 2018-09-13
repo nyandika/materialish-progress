@@ -3,24 +3,22 @@ package com.pnikosis.materialishprogress.sample;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.pnikosis.materialishprogress.ProgressWheel;
 
-import java.text.DecimalFormat;
+import java.util.Locale;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     private ProgressWheel progressWheel;
     private ProgressWheel progressWheelInterpolated;
@@ -34,7 +32,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button buttonAbout = (Button) findViewById(R.id.button_about);
+        Button buttonAbout = findViewById(R.id.button_about);
         buttonAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,18 +50,18 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        progressWheel = (ProgressWheel) findViewById(R.id.progress_wheel);
-        progressWheelInterpolated = (ProgressWheel) findViewById(R.id.interpolated);
-        progressWheelLinear = (ProgressWheel) findViewById(R.id.linear);
+        progressWheel = findViewById(R.id.progress_wheel);
+        progressWheelInterpolated = findViewById(R.id.interpolated);
+        progressWheelLinear = findViewById(R.id.linear);
 
-        interpolatedValue = (TextView) findViewById(R.id.interpolatedValue);
-        linearValue = (TextView) findViewById(R.id.linearValue);
+        interpolatedValue = findViewById(R.id.interpolatedValue);
+        linearValue = findViewById(R.id.linearValue);
 
-        Spinner spinnerOptions = (Spinner) findViewById(R.id.spinner_options);
+        Spinner spinnerOptions = findViewById(R.id.spinner_options);
         spinnerOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch(position) {
+                switch (position) {
                     case 0:
                         progressWheelLinear.setProgress(0.0f);
                         progressWheelInterpolated.setProgress(0.0f);
@@ -71,26 +69,26 @@ public class MainActivity extends ActionBarActivity {
                         progressWheelInterpolated.setCallback(new ProgressWheel.ProgressCallback() {
                             @Override
                             public void onProgressUpdate(float progress) {
-                                if(progress == 0) {
+                                if (progress == 0) {
                                     progressWheelInterpolated.setProgress(1.0f);
-                                } else if(progress == 1.0f) {
+                                } else if (progress == 1.0f) {
                                     progressWheelInterpolated.setProgress(0.0f);
                                 }
 
-                                interpolatedValue.setText(String.format("%.2f", progress));
+                                interpolatedValue.setText(String.format(Locale.US, "%.2f", progress));
                             }
                         });
 
                         progressWheelLinear.setCallback(new ProgressWheel.ProgressCallback() {
                             @Override
                             public void onProgressUpdate(float progress) {
-                                if(progress == 0) {
+                                if (progress == 0) {
                                     progressWheelLinear.setProgress(1.0f);
-                                } else if(progress == 1.0f) {
+                                } else if (progress == 1.0f) {
                                     progressWheelLinear.setProgress(0.0f);
                                 }
 
-                                linearValue.setText(String.format("%.2f", progress));
+                                linearValue.setText(String.format(Locale.US, "%.2f", progress));
                             }
                         });
                         break;
@@ -124,11 +122,11 @@ public class MainActivity extends ActionBarActivity {
         final int defaultBarColor = progressWheel.getBarColor();
         final int defaultWheelColor = progressWheel.getRimColor();
 
-        Spinner colorOptions = (Spinner) findViewById(R.id.spinner_options_color);
+        Spinner colorOptions = findViewById(R.id.spinner_options_color);
         colorOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch(position) {
+                switch (position) {
                     case 0:
                         progressWheel.setBarColor(defaultBarColor);
                         progressWheelInterpolated.setBarColor(defaultBarColor);
@@ -153,11 +151,11 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        Spinner wheelColorOptions = (Spinner) findViewById(R.id.spinner_options_rim_color);
+        Spinner wheelColorOptions = findViewById(R.id.spinner_options_rim_color);
         wheelColorOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch(position) {
+                switch (position) {
                     case 0:
                         progressWheel.setRimColor(defaultWheelColor);
                         progressWheelInterpolated.setRimColor(defaultWheelColor);
@@ -187,13 +185,13 @@ public class MainActivity extends ActionBarActivity {
         progressWheelLinear.setCallback(new ProgressWheel.ProgressCallback() {
             @Override
             public void onProgressUpdate(float progress) {
-                linearValue.setText(String.format("%.2f", progress));
+                linearValue.setText(String.format(Locale.US, "%.2f", progress));
             }
         });
         progressWheelInterpolated.setCallback(new ProgressWheel.ProgressCallback() {
             @Override
             public void onProgressUpdate(float progress) {
-                interpolatedValue.setText(String.format("%.2f", progress));
+                interpolatedValue.setText(String.format(Locale.US, "%.2f", progress));
             }
         });
 
@@ -214,7 +212,6 @@ public class MainActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
 
 
         return super.onOptionsItemSelected(item);
