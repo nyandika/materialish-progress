@@ -28,16 +28,15 @@ def getVersionName = { ->
 }
 
 def getArtificatId = { ->
-    return "materialishprogress"
+    return "materialish-progress"
 }
 
 publishing {
     publications {
-        bar(MavenPublication) {
-            groupId 'com.pnikosis'
+        gpr(MavenPublication) {
+            group 'com.pnikosis'
             artifactId getArtificatId()
             version getVersionName()
-            artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
         }
     }
 
