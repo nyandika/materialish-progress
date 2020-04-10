@@ -22,7 +22,7 @@ import android.view.View;
  * Todd Davies' Progress Wheel https://github.com/Todd-Davies/ProgressWheel
  *
  * @author Nico Hormazábal
- * <p/>
+ * <p></p>
  * Licensed under the Apache License 2.0 license see:
  * http://www.apache.org/licenses/LICENSE-2.0
  */
@@ -76,6 +76,8 @@ public class ProgressWheel extends View {
 
     /**
      * The constructor for the ProgressWheel
+     * @param context the activity context
+     * @param attrs attribute set
      */
     public ProgressWheel(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -87,6 +89,7 @@ public class ProgressWheel extends View {
 
     /**
      * The constructor for the ProgressWheel
+     * @param context the activity context
      */
     public ProgressWheel(Context context) {
         super(context);
@@ -157,7 +160,7 @@ public class ProgressWheel extends View {
 
     /**
      * Use onSizeChanged instead of onAttachedToWindow to get the dimensions of the view,
-     * because this method is called after measuring the dimensions of MATCH_PARENT & WRAP_CONTENT.
+     * because this method is called after measuring the dimensions of MATCH_PARENT and WRAP_CONTENT.
      * Use this dimensions to setup the bounds and paints.
      */
     @Override
@@ -699,7 +702,7 @@ public class ProgressWheel extends View {
          *
          * @param progress a double value between 0.00 and 1.00 both included
          */
-        public void onProgressUpdate(float progress);
+        void onProgressUpdate(float progress);
     }
 
     static class WheelSavedState extends BaseSavedState {

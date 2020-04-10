@@ -1,7 +1,5 @@
 apply plugin: 'com.android.library'
 
-apply plugin: 'maven-publish'
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -23,20 +21,18 @@ android {
 def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
 
-def getVersionName = { ->
-    return "1.7.1"
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-def getArtificatId = { ->
-    return "materialish-progress"
-}
+apply from: '../maven-publish-helper.gradle'
 
 publishing {
     publications {
-        gpr(MavenPublication) {
-            group 'com.pnikosis'
-            artifactId getArtificatId()
-            version getVersionName()
+        release(MavenPublication) {
+            groupId 'com.github.nyandika'
+            artifactId 'materialish-progress'
+            version android.defaultConfig.versionName
         }
     }
 
@@ -51,8 +47,4 @@ publishing {
             }
         }
     }
-}
-
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
